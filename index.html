@@ -12,9 +12,7 @@
       --muted: #9ca3af;
       --accent: #6ee7b7;
       --accent-2: #60a5fa;
-      --hover-glow: 0 0 15px rgba(96, 165, 250, 0.5);
     }
-
     [data-theme="light"] {
       --bg: #f9fafb;
       --card: #ffffff;
@@ -22,186 +20,111 @@
       --muted: #4b5563;
       --accent: #06b6d4;
       --accent-2: #0891b2;
-      --hover-glow: 0 0 15px rgba(6, 182, 212, 0.4);
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background-color:var(--bg);
+      color:var(--text);
+      transition:background-color .25s, color .25s;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    body {
-      margin: 0;
-      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background-color: var(--bg);
-      color: var(--text);
-      transition: background-color 0.25s, color 0.25s;
+    /* container */
+    .wrap{max-width:980px;margin:36px auto;padding:18px;}
+
+    /* header card */
+    header{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1.75rem;
+      align-items:center;
+      justify-content:center;
+      background:var(--card);
+      border-radius:14px;
+      padding:26px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.45);
+      border:1px solid rgba(255,255,255,0.02);
     }
 
-    .wrap {
-      max-width: 950px;
-      margin: 36px auto;
-      padding: 18px;
+    header img{
+      width:180px;height:180px;object-fit:cover;border-radius:12px;border:3px solid var(--accent);
+      box-shadow:0 8px 22px rgba(0,0,0,0.5);
     }
 
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.75rem;
-      align-items: center;
-      justify-content: center;
-      background: var(--card);
-      border-radius: 14px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.02);
-      transition: background 0.3s;
+    .intro{max-width:520px;}
+    h1{margin:0;font-size:1.9rem;letter-spacing:0.2px}
+    .role{margin:8px 0;color:var(--muted);font-size:0.98rem}
+    .line{margin:6px 0;color:var(--muted);font-size:0.95rem}
+
+    /* buttons */
+    .links{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .btn{
+      display:inline-block;
+      padding:8px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+      text-decoration:none;font-weight:600;font-size:0.92rem;color:var(--text);
+      background:transparent;transition:all .18s;backdrop-filter: blur(2px);
+    }
+    .btn:hover{transform:translateY(-3px)}
+    .btn.accent{
+      background:linear-gradient(90deg,var(--accent-2),var(--accent));
+      color:#042028;border:0;box-shadow:0 8px 24px rgba(96,165,250,0.08);
+    }
+    .btn.ghost{
+      border:1px solid rgba(109,129,140,0.14);
+      color:var(--muted);
+      background:transparent;
     }
 
-    header img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 3px solid var(--accent);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
-    }
+    /* small text */
+    .muted{color:var(--muted);font-size:0.92rem;margin-top:8px}
 
-    .intro {
-      max-width: 520px;
-      text-align: left;
-    }
+    /* theme toggle */
+    #themeToggle{margin-left:6px;background:transparent;border:0;cursor:pointer;font-size:20px;color:var(--muted)}
 
-    h1 {
-      margin: 0;
-      font-size: 1.9rem;
-      letter-spacing: 0.2px;
-    }
+    footer{text-align:center;margin-top:34px;color:var(--muted);font-size:0.92rem}
 
-    .role {
-      margin: 8px 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .line {
-      margin: 6px 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .links {
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      color: var(--text);
-      background: transparent;
-      transition: all 0.2s;
-      backdrop-filter: blur(2px);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--hover-glow);
-    }
-
-    .btn.accent {
-      background: linear-gradient(90deg, var(--accent-2), var(--accent));
-      color: #042028;
-      border: 0;
-      box-shadow: 0 8px 24px rgba(96, 165, 250, 0.08);
-    }
-
-    .btn.ghost {
-      border: 1px solid rgba(109, 129, 140, 0.14);
-      color: var(--muted);
-      background: transparent;
-    }
-
-    .muted {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 8px;
-    }
-
-    #themeToggle {
-      margin-left: 6px;
-      background: transparent;
-      border: 0;
-      cursor: pointer;
-      font-size: 20px;
-      color: var(--muted);
-      transition: transform 0.2s;
-    }
-
-    #themeToggle:hover {
-      transform: scale(1.1);
-      color: var(--accent);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 34px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    /* 📱 Mobile Styles */
-    @media (max-width: 720px) {
-      header {
-        padding: 18px;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      header img {
-        width: 150px;
-        height: 150px;
-      }
-
-      .intro {
-        max-width: 100%;
-        text-align: center;
-      }
-
-      .links {
-        justify-content: center;
-      }
+    /* responsive */
+    @media (max-width:720px){
+      header{padding:18px}
+      header img{width:140px;height:140px}
+      .intro{max-width:100%}
+      .wrap{padding:12px}
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
+      <!-- profile image -->
       <img src="assets/sanskriti.jpg" alt="Sanskriti Tyagi">
 
+      <!-- intro -->
       <div class="intro">
         <h1>Sanskriti Tyagi</h1>
         <div class="role">3rd Year Engineering Student | SDE & Analytics Enthusiast</div>
         <div class="line">AI • Cloud • Data</div>
         <div class="muted"><strong>Education:</strong> 10th - 74% | 12th - 88.2%</div>
 
+        <!-- links / resume -->
         <div class="links">
           <a class="btn ghost" href="mailto:sanskritityagi02@gmail.com">Email</a>
           <a class="btn ghost" href="https://github.com/sanskritityagi31" target="_blank" rel="noopener">GitHub</a>
           <a class="btn ghost" href="https://www.linkedin.com/in/sanskriti-tyagi" target="_blank" rel="noopener">LinkedIn</a>
+
+          <!-- Resume button: make sure assets/resume.pdf exists -->
           <a class="btn accent" href="assets/resume.pdf" target="_blank" rel="noopener">📄 Resume</a>
+
+          <!-- theme toggle -->
           <button id="themeToggle" title="Toggle theme">🌙</button>
         </div>
 
+        <!-- short blurb (optional) -->
         <div class="muted" style="margin-top:10px">
-          Projects: Sentiment Analysis • LeetCode Tracker • Portfolio Website — Cloud deploy experience (AWS Free-tier).
+          Projects: Sentiment Analysis • LeetCode Tracker • Portfolio Website — Cloud deploy experience (AWS free-tier).
         </div>
       </div>
     </header>
@@ -226,6 +149,7 @@
       localStorage.setItem("theme", mode);
     }
 
+    // load saved theme (default dark)
     const saved = localStorage.getItem("theme") || "dark";
     setTheme(saved);
 
