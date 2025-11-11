@@ -1,238 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sanskriti Tyagi — Portfolio</title>
   <style>
-    :root {
-      --bg-dark: #0f1117;
-      --card-dark: #14181d;
-      --text-dark: #e0e6ed;
-      --accent1: #3b82f6;
-      --accent2: #06b6d4;
-      --muted-dark: #94a3b8;
-      --bg-light: #f8fafc;
-      --text-light: #1f2937;
-      --card-light: #ffffff;
-      --muted-light: #4b5563;
+    :root{
+      --bg-dark:#0f1117; --card-dark:#14181d; --text:#e6eef6;
+      --accent1:#3b82f6; --accent2:#06b6d4; --muted:#94a3b8;
+      --bg-light:#f8fafc; --card-light:#ffffff; --muted-light:#4b5563;
     }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:var(--bg-dark);color:var(--text);transition:background .3s,color .3s;overflow-x:hidden}
+    body.light{background:var(--bg-light);color:var(--card-dark)}
 
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
-      transition: 0.5s ease;
-      overflow-x: hidden;
+    /* Header */
+    header{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;text-align:center;padding:2rem 1rem;position:relative;overflow:hidden;animation:fadeIn .9s ease}
+    header img{width:120px;height:120px;border-radius:50%;border:3px solid #fff;object-fit:cover;margin-bottom:1rem;animation:floatIn 1s ease}
+    @keyframes floatIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}} @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    header h1{margin:0;font-size:2.2rem} header p{margin:.5rem 0;color:rgba(255,255,255,0.95)}
+    .intro-line{color:rgba(255,255,255,0.9);margin-top:.4rem}
+
+    /* Theme Toggle */
+    .theme-toggle{position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.18);border:0;padding:8px 12px;border-radius:16px;cursor:pointer;color:#fff;font-weight:600}
+    .theme-toggle:hover{background:rgba(255,255,255,0.28)}
+
+    /* Header Buttons (rounded) */
+    .header-links{margin-top:12px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1.2s ease}
+    .header-links a, .header-links button{
+      display:inline-block;padding:10px 18px;border-radius:22px;background:rgba(255,255,255,0.14);color:#fff;text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,0.12);
+      transition:all .25s;opacity:0;transform:translateY(10px);cursor:pointer;
     }
+    .header-links a:hover, .header-links button:hover{background:#fff;color:var(--accent1);box-shadow:0 8px 24px rgba(255,255,255,0.12);transform:translateY(-4px) scale(1.03)}
+    .header-links a:nth-child(1){animation:fadeInUp .9s .3s forwards}
+    .header-links a:nth-child(2){animation:fadeInUp .9s .45s forwards}
+    .header-links a:nth-child(3){animation:fadeInUp .9s .6s forwards}
+    .header-links a:nth-child(4){animation:fadeInUp .9s .75s forwards}
 
-    body.light {
-      background-color: var(--bg-light);
-      color: var(--text-light);
-    }
+    @keyframes fadeInUp{to{opacity:1;transform:none}}
 
-    header {
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      position: relative;
-      overflow: hidden;
-      animation: fadeIn 1.2s ease-in-out;
-    }
+    /* Layout - single column */
+    .wrap{max-width:1000px;margin:30px auto;padding:0 18px}
+    .grid{display:block}
 
-    header img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid white;
-      object-fit: cover;
-      margin-bottom: 1rem;
-      animation: floatIn 1.5s ease-in-out;
-    }
+    /* Sections & cards */
+    section{background:var(--card-dark);border-radius:12px;padding:18px;margin:18px 0;box-shadow:0 8px 30px rgba(0,0,0,0.45);opacity:0;transform:translateY(40px);transition:all .9s ease}
+    body.light section{background:var(--card-light)}
+    section.visible{opacity:1;transform:none}
+    h2{color:var(--accent1);margin:0 0 10px 0}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .project{margin-bottom:12px;padding:12px;border-left:4px solid var(--accent1);border-radius:8px;background:rgba(255,255,255,0.02)}
+    .project h3{margin:0;font-size:1.02rem}
+    ul{color:var(--muted);line-height:1.6;margin:8px 0 0 18px}
+    body.light ul{color:var(--muted-light)}
+    .small{color:var(--muted);font-size:.95rem}
 
-    @keyframes floatIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+    footer{text-align:center;color:var(--muted);margin:28px 0;font-size:.92rem}
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    /* Chatbot */
+    #chatButton{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;font-size:24px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.35);z-index:20}
+    #chatWindow{position:fixed;right:20px;bottom:88px;width:320px;background:var(--card-dark);border-radius:12px;border:2px solid var(--accent1);display:none;flex-direction:column;overflow:hidden;z-index:21}
+    #chatHeader{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;padding:10px;text-align:center;font-weight:700}
+    #chatMessages{padding:10px;height:220px;overflow:auto;color:var(--muted)}
+    #chatInputArea{display:flex;border-top:1px solid rgba(255,255,255,0.04)}
+    #chatInput{flex:1;padding:10px;border:0;background:transparent;color:var(--text)}
+    #sendButton{background:linear-gradient(135deg,var(--accent1),var(--accent2));border:0;color:#fff;padding:0 14px;cursor:pointer}
 
-    header h1 {
-      margin: 0;
-      font-size: 2.3rem;
-      animation: fadeIn 1.2s ease-in;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-      animation: fadeIn 1.5s ease-in;
-    }
-
-    .theme-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border: none;
-      border-radius: 20px;
-      padding: 10px 18px;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .theme-toggle:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* 💠 Header Buttons */
-    .header-links {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      animation: fadeInUp 1.8s ease-in;
-    }
-
-    .header-links a {
-      text-decoration: none;
-      color: white;
-      background-color: rgba(255, 255, 255, 0.15);
-      border: 1px solid white;
-      padding: 10px 18px;
-      border-radius: 25px;
-      transition: 0.4s ease;
-      font-weight: 600;
-      font-size: 0.95rem;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(15px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .header-links a:nth-child(1) { animation-delay: 0.3s; }
-    .header-links a:nth-child(2) { animation-delay: 0.5s; }
-    .header-links a:nth-child(3) { animation-delay: 0.7s; }
-    .header-links a:nth-child(4) { animation-delay: 0.9s; }
-
-    .header-links a:hover {
-      background-color: white;
-      color: var(--accent1);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
-      transform: translateY(-3px) scale(1.05);
-    }
-
-    /* Section styling */
-    section {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem 2rem;
-      background-color: var(--card-dark);
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      transform: translateY(50px);
-      transition: 1s ease all;
-    }
-
-    body.light section {
-      background-color: var(--card-light);
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    h2 {
-      color: var(--accent1);
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 0.5rem;
-    }
-
-    footer {
-      text-align: center;
-      color: #9ca3af;
-      padding: 2rem 0;
-      font-size: 0.9rem;
-    }
-
-    /* 💬 Chatbot */
-    #chatButton {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: 0.3s ease;
-      z-index: 10;
-    }
-
-    #chatButton:hover { transform: scale(1.1); }
+    .meta{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;color:var(--muted)}
   </style>
 </head>
 <body>
 
-  <!-- 🌟 HEADER -->
+  <!-- HEADER -->
   <header>
     <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
-    <img src="https://i.ibb.co/ksVdGjLD/sanskriti-profile.jpg" alt="Sanskriti Tyagi">
-    <h1>Sanskriti Tyagi</h1>
-    <p>3rd Year Engineering Student | SDE & Analytics Enthusiast | AI • Cloud • Data</p>
 
-    <div class="header-links">
-      <a href="mailto:sanskritityagi02@gmail.com">Email</a>
-      <a href="https://github.com/sanskritityagi31" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/sanskriti-tyagi" target="_blank">LinkedIn</a>
-      <a href="assets/resume.pdf" target="_blank">Resume</a>
+    <!-- local path or hosted - you can switch to local assets/sanskriti.jpg if desired -->
+   <img src="assets/sanskriti.jpg" alt="Sanskriti Tyagi">
+    <h1>Sanskriti Tyagi</h1>
+    <p class="intro-line">3rd-year Engineering student — SDE & Analytics Enthusiast. AI • Cloud • Data</p>
+
+    <!-- Header buttons (rounded) - note the new View and Download resume controls -->
+    <div class="header-links" aria-label="contact links">
+      <a href="mailto:sanskritityagi02@gmail.com?subject=Opportunity%20via%20portfolio" title="Email Sanskriti">Email</a>
+      <a href="https://github.com/sanskritityagi31" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/sanskriti-tyagi-904695250" target="_blank" rel="noopener">LinkedIn</a>
+
+      <!-- View resume in new tab -->
+      <a href="assets/resume.pdf" target="_blank" rel="noopener" title="View Resume">View Resume</a>
+
+      <!-- Force download (download attribute). Browser will save as resume.pdf (or the filename specified) -->
+      <a href="assets/resume.pdf" download="Sanskriti_Tyagi_Resume.pdf" title="Download Resume">Download Resume</a>
     </div>
   </header>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I’m a 3rd-year engineering student passionate about software development, AI, and data analytics. I love combining creativity and technology to design intelligent, efficient, and visually appealing applications.</p>
-  </section>
+  <!-- MAIN WRAP (single column) -->
+  <div class="wrap">
+    <div class="grid">
+      <!-- SINGLE column main content -->
+      <main>
+        <section id="about" class="card">
+          <h2>About Me</h2>
+          <p class="small">I’m a 3rd-year engineering student passionate about software development, AI, and data analytics. I love combining creativity and technology to design intelligent, efficient, and visually appealing applications.</p>
 
-  <footer>© 2025 Sanskriti Tyagi — Portfolio hosted on GitHub Pages</footer>
+          <div style="margin-top:12px">
+            <h3 style="margin:8px 0 6px 0">Contact</h3>
+            <p class="small">
+              Email: <a href="mailto:sanskritityagi02@gmail.com">sanskritityagi02@gmail.com</a><br/>
+              GitHub: <a href="https://github.com/sanskritityagi31" target="_blank" rel="noopener">sanskritityagi31</a><br/>
+              LinkedIn: <a href="https://www.linkedin.com/in/sanskriti-tyagi-904695250" target="_blank" rel="noopener">sanskriti-tyagi-904695250</a>
+            </p>
+          </div>
+        </section>
 
-  <button id="chatButton">💬</button>
+        <section id="skills" class="card">
+          <h2>Technical Skills</h2>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <ul>
+              <li><strong>Programming:</strong> Python, Java, C++</li>
+              <li><strong>Web:</strong> HTML, CSS, JavaScript, Streamlit</li>
+              <li><strong>DB:</strong> SQL, MySQL, SQLite, PostgreSQL</li>
+            </ul>
+            <ul>
+              <li><strong>AI/ML:</strong> TensorFlow, NLP, Deep Learning</li>
+              <li><strong>Cloud:</strong> AWS (S3, EC2, Route53)</li>
+              <li><strong>Other:</strong> DSA, Git, CI/CD</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="projects" class="card">
+          <h2>Projects</h2>
+
+          <div class="project">
+            <h3>🌐 Portfolio Website | HTML, CSS, JavaScript, AWS S3, Route53, OpenAI API</h3>
+            <ul>
+              <li>Planned AWS S3 + Route53 hosting (current: GitHub Pages). Designed for fast load times and optimized assets.</li>
+              <li>Recruiter chatbot UI integrated; backend OpenAI upgrade planned (offline chatbot currently used).</li>
+            </ul>
+          </div>
+
+          <div class="project">
+            <h3>🧠 Sentiment Analysis of IMDB | Python, NLP, TensorFlow</h3>
+            <ul>
+              <li>Trained LSTM model for binary sentiment classification on IMDB dataset.</li>
+            </ul>
+          </div>
+
+          <div class="project">
+            <h3>📊 LeetCode Practice Tracker | Python, Streamlit, SQLite, OpenAI</h3>
+            <ul>
+              <li>Interactive Streamlit dashboard to visualize practice history (accuracy, difficulty, tags, time).</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="education" class="card">
+          <h2>Education</h2>
+          <ul>
+            <li><strong>Bachelor of Engineering</strong> — 6th Semester</li>
+            <li>10th: 74% | 12th: 88.2%</li>
+          </ul>
+        </section>
+
+        <section id="achievements" class="card">
+          <h2>Achievements</h2>
+          <ul>
+            <li>Completed DSA (C++) from Apna College</li>
+            <li>Contributor at GSSoC’24</li>
+            <li>Built 3+ AI-powered projects (models & dashboards)</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <footer>© 2025 Sanskriti Tyagi — Portfolio</footer>
+  </div>
+
+  <!-- Chatbot UI -->
+  <button id="chatButton" aria-label="Open chat">💬</button>
+  <div id="chatWindow" role="dialog" aria-label="Recruiter chatbot">
+    <div id="chatHeader">Recruiter Chatbot</div>
+    <div id="chatMessages"><p><strong>Bot:</strong> Hello! Ask about skills, projects, resume, or contact.</p></div>
+    <div id="chatInputArea">
+      <input id="chatInput" placeholder="Type your question..." aria-label="Chat input" />
+      <button id="sendButton">Send</button>
+    </div>
+  </div>
 
   <script>
-    // 🌙 Theme Toggle
-    const toggle = document.getElementById("themeToggle");
-    toggle.onclick = () => {
-      document.body.classList.toggle("light");
-      toggle.textContent = document.body.classList.contains("light") ? "🌞 Light Mode" : "🌙 Dark Mode";
-    };
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      themeToggle.textContent = document.body.classList.contains('light') ? '🌞 Light Mode' : '🌙 Dark Mode';
+    });
 
-    // Reveal sections
-    const sections = document.querySelectorAll("section");
+    // Reveal sections on scroll
+    const sections = document.querySelectorAll('section');
     const reveal = () => {
       const trigger = window.innerHeight / 1.2;
-      sections.forEach(sec => {
-        if (sec.getBoundingClientRect().top < trigger) sec.classList.add("visible");
+      sections.forEach(s => {
+        if (s.getBoundingClientRect().top < trigger) s.classList.add('visible');
       });
     };
-    window.addEventListener("scroll", reveal);
+    window.addEventListener('scroll', reveal);
     reveal();
+
+    // Chatbot toggle & local responses
+    const chatButton = document.getElementById('chatButton');
+    const chatWindow = document.getElementById('chatWindow');
+    const sendButton = document.getElementById('sendButton');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    chatButton.onclick = () => {
+      const isOpen = chatWindow.style.display === 'flex';
+      chatWindow.style.display = isOpen ? 'none' : 'flex';
+      chatWindow.style.flexDirection = 'column';
+      if (!isOpen) chatInput.focus();
+    };
+
+    // Basic local chatbot responses for portfolio demo
+    const rules = [
+      { test: /\bhi\b|\bhello\b|\bhey\b/i, reply: `Hi! I'm a demo chatbot for Sanskriti. Ask 'skills', 'projects', 'resume', or 'contact'.`},
+      { test: /\bskills?\b|\btechnolog/i, reply: `Key skills: Python, TensorFlow, HTML/CSS/JS, Streamlit, SQL, AWS.`},
+      { test: /\bportfolio\b/i, reply: "Portfolio: responsive site, recruiter chatbot UI, planned AWS hosting."},
+      { test: /\bsentiment|imdb\b/i, reply: "Sentiment: IMDB LSTM model saved, demo script available."},
+      { test: /\bleetcode|tracker\b/i, reply: "LeetCode Tracker: Streamlit dashboard with analytics and optional AI suggestions."},
+      { test: /\bcontact|email\b/i, reply: "Reach: sanskritityagi02@gmail.com"},
+      { test: /\bresume|cv\b/i, reply: `Resume: <a href="assets/resume.pdf" target="_blank">View</a> • <a href="assets/resume.pdf" download="Sanskriti_Tyagi_Resume.pdf">Download</a>`},
+      { test: /./, reply: "Try: 'skills', 'projects', 'resume', or 'contact'."}
+    ];
+
+    function append(who, html){
+      chatMessages.innerHTML += `<p><strong>${who}:</strong> ${html}</p>`;
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    sendButton.onclick = () => {
+      const text = chatInput.value.trim();
+      if(!text) return;
+      append('You', text);
+      chatInput.value = '';
+      const match = rules.find(r => r.test.test(text));
+      setTimeout(() => append('Bot', match ? match.reply : rules[rules.length - 1].reply), 350);
+    };
+
+    chatInput.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); sendButton.click(); } });
   </script>
 </body>
 </html>
