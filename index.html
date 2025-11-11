@@ -1,162 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sanskriti Tyagi | Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanskriti Tyagi — Portfolio</title>
   <style>
     :root {
-      --bg: #0f1720;
-      --card: #111827;
-      --text: #e6eef6;
-      --muted: #9ca3af;
-      --accent: #6ee7b7;
-      --accent-2: #60a5fa;
-    }
-    [data-theme="light"] {
-      --bg: #f9fafb;
-      --card: #ffffff;
-      --text: #1e293b;
-      --muted: #4b5563;
-      --accent: #06b6d4;
-      --accent-2: #0891b2;
+      --bg-dark: #0f1117;
+      --card-dark: #14181d;
+      --text-dark: #e0e6ed;
+      --accent1: #3b82f6;
+      --accent2: #06b6d4;
+      --muted-dark: #94a3b8;
+
+      --bg-light: #f8fafc;
+      --text-light: #1f2937;
+      --card-light: #ffffff;
+      --muted-light: #4b5563;
     }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background-color:var(--bg);
-      color:var(--text);
-      transition:background-color .25s, color .25s;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      transition: 0.5s ease;
     }
 
-    /* container */
-    .wrap{max-width:980px;margin:36px auto;padding:18px;}
-
-    /* header card */
-    header{
-      display:flex;
-      flex-wrap:wrap;
-      gap:1.75rem;
-      align-items:center;
-      justify-content:center;
-      background:var(--card);
-      border-radius:14px;
-      padding:26px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.45);
-      border:1px solid rgba(255,255,255,0.02);
+    body.light {
+      background-color: var(--bg-light);
+      color: var(--text-light);
     }
 
-    header img{
-      width:180px;height:180px;object-fit:cover;border-radius:12px;border:3px solid var(--accent);
-      box-shadow:0 8px 22px rgba(0,0,0,0.5);
+    header {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .intro{max-width:520px;}
-    h1{margin:0;font-size:1.9rem;letter-spacing:0.2px}
-    .role{margin:8px 0;color:var(--muted);font-size:0.98rem}
-    .line{margin:6px 0;color:var(--muted);font-size:0.95rem}
-
-    /* buttons */
-    .links{margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-    .btn{
-      display:inline-block;
-      padding:8px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
-      text-decoration:none;font-weight:600;font-size:0.92rem;color:var(--text);
-      background:transparent;transition:all .18s;backdrop-filter: blur(2px);
-    }
-    .btn:hover{transform:translateY(-3px)}
-    .btn.accent{
-      background:linear-gradient(90deg,var(--accent-2),var(--accent));
-      color:#042028;border:0;box-shadow:0 8px 24px rgba(96,165,250,0.08);
-    }
-    .btn.ghost{
-      border:1px solid rgba(109,129,140,0.14);
-      color:var(--muted);
-      background:transparent;
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
     }
 
-    /* small text */
-    .muted{color:var(--muted);font-size:0.92rem;margin-top:8px}
+    header img:hover {
+      transform: scale(1.05);
+    }
 
-    /* theme toggle */
-    #themeToggle{margin-left:6px;background:transparent;border:0;cursor:pointer;font-size:20px;color:var(--muted)}
+    header h1 { margin: 0; font-size: 2.3rem; }
+    header p { margin-top: 0.5rem; font-size: 1rem; }
 
-    footer{text-align:center;margin-top:34px;color:var(--muted);font-size:0.92rem}
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 20px;
+      padding: 10px 18px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-    /* responsive */
-    @media (max-width:720px){
-      header{padding:18px}
-      header img{width:140px;height:140px}
-      .intro{max-width:100%}
-      .wrap{padding:12px}
+    .theme-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* 🌸 Resume button style */
+    .resume-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background: white;
+      color: var(--accent1);
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .resume-btn:hover {
+      background: var(--accent2);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      background-color: var(--card-dark);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: 1s ease all;
+    }
+
+    body.light section {
+      background-color: var(--card-light);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: var(--accent1);
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.5rem;
+    }
+
+    ul {
+      line-height: 1.7;
+      color: var(--muted-dark);
+    }
+
+    body.light ul {
+      color: var(--muted-light);
+    }
+
+    a {
+      color: var(--accent1);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .project {
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--accent1);
+      border-radius: 10px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      transition: 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    footer {
+      text-align: center;
+      color: #9ca3af;
+      padding: 2rem 0;
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* 💬 Chatbot Styles */
+    #chatButton {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: 0.3s ease;
+      z-index: 10;
+    }
+
+    #chatButton:hover { transform: scale(1.1); }
+
+    #chatWindow {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 300px;
+      background-color: var(--card-dark);
+      border: 2px solid var(--accent1);
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    #chatHeader {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: 600;
+    }
+
+    #chatMessages {
+      padding: 10px;
+      height: 200px;
+      overflow-y: auto;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    #chatInputArea {
+      display: flex;
+      border-top: 1px solid #374151;
+    }
+
+    #chatInput {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+      background-color: #111827;
+      color: var(--text-dark);
+      font-size: 14px;
+    }
+
+    #sendButton {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      border: none;
+      color: white;
+      padding: 0 15px;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <!-- profile image -->
-      <img src="assets/sanskriti.jpg" alt="Sanskriti Tyagi">
+  <!-- 🌟 HEADER -->
+  <header>
+    <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+    <img src="https://i.ibb.co/ksVdGjLD/sanskriti-profile.jpg" alt="Sanskriti Tyagi">
+    <h1>Sanskriti Tyagi</h1>
+    <p>3rd Year Engineering Student | SDE & Analytics Enthusiast | AI • Cloud • Data</p>
+    <p>
+      <a href="mailto:sanskritityagi02@gmail.com">Email</a> •
+      <a href="https://github.com/sanskritityagi31" target="_blank">GitHub</a> •
+      <a href="https://linkedin.com/in/sanskriti-tyagi" target="_blank">LinkedIn</a>
+    </p>
 
-      <!-- intro -->
-      <div class="intro">
-        <h1>Sanskriti Tyagi</h1>
-        <div class="role">3rd Year Engineering Student | SDE & Analytics Enthusiast</div>
-        <div class="line">AI • Cloud • Data</div>
-        <div class="muted"><strong>Education:</strong> 10th - 74% | 12th - 88.2%</div>
+    <!-- 📄 Resume Button -->
+    <a href="assets/resume.pdf" class="resume-btn" target="_blank">📄 View Resume</a>
+  </header>
 
-        <!-- links / resume -->
-        <div class="links">
-          <a class="btn ghost" href="mailto:sanskritityagi02@gmail.com">Email</a>
-          <a class="btn ghost" href="https://github.com/sanskritityagi31" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn ghost" href="https://www.linkedin.com/in/sanskriti-tyagi" target="_blank" rel="noopener">LinkedIn</a>
+  <!-- 🌼 SECTIONS -->
+  <section>
+    <h2>About Me</h2>
+    <p>I’m a 3rd-year engineering student passionate about software development, AI, and data analytics. I love combining creativity and technology to design intelligent, efficient, and visually appealing applications.</p>
+  </section>
 
-          <!-- Resume button: make sure assets/resume.pdf exists -->
-          <a class="btn accent" href="assets/resume.pdf" target="_blank" rel="noopener">📄 Resume</a>
+  <section>
+    <h2>Technical Skills</h2>
+    <div class="grid">
+      <ul>
+        <li><strong>Programming:</strong> Python, Java, C++</li>
+        <li><strong>Web:</strong> HTML, CSS, JavaScript, Streamlit</li>
+        <li><strong>Database:</strong> SQL, MySQL, SQLite, PostgreSQL</li>
+      </ul>
+      <ul>
+        <li><strong>AI/ML:</strong> TensorFlow, OpenAI API, NLP, Deep Learning</li>
+        <li><strong>Cloud:</strong> AWS (S3, EC2, Route53)</li>
+        <li><strong>Other:</strong> DSA, Analytics, UI Design</li>
+      </ul>
+    </div>
+  </section>
 
-          <!-- theme toggle -->
-          <button id="themeToggle" title="Toggle theme">🌙</button>
-        </div>
+  <section>
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>🌐 Portfolio Website | HTML, CSS, JS, AWS, OpenAI</h3>
+      <ul>
+        <li>Responsive AWS-hosted portfolio with 99.99% uptime and sub-2s load time.</li>
+        <li>Integrated recruiter chatbot for interactive resume Q&A.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <h3>🧠 Sentiment Analysis | Python, NLP, TensorFlow</h3>
+      <ul>
+        <li>Classified IMDB reviews using LSTM achieving 90%+ accuracy.</li>
+        <li>Deployed model for real-time sentiment feedback visualization.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <h3>📊 LeetCode Practice Tracker | Streamlit, AWS, OpenAI</h3>
+      <ul>
+        <li>Dashboard visualizing LeetCode analytics and topic trends.</li>
+      </ul>
+    </div>
+  </section>
 
-        <!-- short blurb (optional) -->
-        <div class="muted" style="margin-top:10px">
-          Projects: Sentiment Analysis • LeetCode Tracker • Portfolio Website — Cloud deploy experience (AWS free-tier).
-        </div>
-      </div>
-    </header>
+  <section>
+    <h2>Education</h2>
+    <ul>
+      <li><strong>Bachelor of Engineering</strong> — 6th Semester</li>
+      <li>10th: 74% | 12th: 88.2%</li>
+    </ul>
+  </section>
 
-    <footer>
-      © 2025 Sanskriti Tyagi | Built with HTML, CSS, and ❤️
-    </footer>
+  <section>
+    <h2>Achievements</h2>
+    <ul>
+      <li>Completed DSA (C++) from Apna College</li>
+      <li>Contributor at GSSoC’24</li>
+      <li>3+ AI-powered projects (AWS + OpenAI)</li>
+    </ul>
+  </section>
+
+  <footer>© 2025 Sanskriti Tyagi — Portfolio hosted on AWS S3 + Route53</footer>
+
+  <!-- 💬 Chatbot -->
+  <button id="chatButton">💬</button>
+  <div id="chatWindow">
+    <div id="chatHeader">Recruiter Chatbot</div>
+    <div id="chatMessages">
+      <p><strong>Bot:</strong> Hi! 👋 Ask me anything about Sanskriti’s skills or projects!</p>
+    </div>
+    <div id="chatInputArea">
+      <input type="text" id="chatInput" placeholder="Type your question..." />
+      <button id="sendButton">Send</button>
+    </div>
   </div>
 
   <script>
+    // Chatbot
+    const chatButton = document.getElementById("chatButton");
+    const chatWindow = document.getElementById("chatWindow");
+    const sendButton = document.getElementById("sendButton");
+    const chatInput = document.getElementById("chatInput");
+    const chatMessages = document.getElementById("chatMessages");
+
+    chatButton.onclick = () => {
+      chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+    };
+
+    sendButton.onclick = () => {
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      chatMessages.innerHTML += `<p><strong>You:</strong> ${msg}</p>`;
+      chatInput.value = "";
+
+      setTimeout(() => {
+        let reply = "Sanskriti specializes in AI, AWS, and full-stack development!";
+        if (msg.toLowerCase().includes("project")) reply = "She built an AWS-hosted portfolio, Sentiment Analysis model, and AI LeetCode Tracker!";
+        if (msg.toLowerCase().includes("contact")) reply = "Reach her at sanskritityagi02@gmail.com or LinkedIn: sanskriti-tyagi.";
+        chatMessages.innerHTML += `<p><strong>Bot:</strong> ${reply}</p>`;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 700);
+    };
+
+    // Theme Toggle
     const toggle = document.getElementById("themeToggle");
-    const root = document.documentElement;
+    toggle.onclick = () => {
+      document.body.classList.toggle("light");
+      toggle.textContent = document.body.classList.contains("light") ? "🌞 Light Mode" : "🌙 Dark Mode";
+    };
 
-    function setTheme(mode) {
-      if (mode === "light") {
-        root.setAttribute("data-theme", "light");
-        toggle.textContent = "☀️";
-      } else {
-        root.removeAttribute("data-theme");
-        toggle.textContent = "🌙";
-      }
-      localStorage.setItem("theme", mode);
-    }
-
-    // load saved theme (default dark)
-    const saved = localStorage.getItem("theme") || "dark";
-    setTheme(saved);
-
-    toggle.addEventListener("click", () => {
-      const isLight = root.hasAttribute("data-theme");
-      setTheme(isLight ? "dark" : "light");
-    });
+    // Scroll animation
+    const sections = document.querySelectorAll("section");
+    const revealOnScroll = () => {
+      const trigger = window.innerHeight / 1.2;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < trigger) section.classList.add("visible");
+      });
+    };
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
   </script>
 </body>
 </html>
